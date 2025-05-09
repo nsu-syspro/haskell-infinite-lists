@@ -12,13 +12,13 @@ task3Tests :: TestTree
 task3Tests = testGroup "Task3"
   [ localOption (mkTimeout (seconds 5)) $ testCase "take 1000 nats" $
       forM_ (takeS 1000 $ zipS indices (zipS nats natsRefS)) $ \(idx, (actual, expected)) -> do
-        assertEqual ("nats #" ++ show idx) actual expected
+        assertEqual ("nats #" ++ show idx) expected actual
 
   , localOption (mkTimeout (seconds 5)) $ testCase "take 1000 fibs" $
       forM_ (takeS 1000 $ zipS indices (zipS fibs fibsRefS)) $ \(idx, (actual, expected)) -> do
-        assertEqual ("fibs #" ++ show idx) actual expected
+        assertEqual ("fibs #" ++ show idx) expected actual
 
   , localOption (mkTimeout (seconds 5)) $ testCase "take 1000 ones" $
       forM_ (takeS 1000 $ zipS indices ones) $ \(idx, actual) -> do
-        assertEqual ("ones #" ++ show idx) actual 1
+        assertEqual ("ones #" ++ show idx) 1 actual
   ]
